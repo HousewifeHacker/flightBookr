@@ -1,0 +1,60 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    background-color: E6F7F4;
+} 
+
+.time {
+    font-weight: bold;
+}
+
+.money {
+    color: red;
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+#flights-menu {
+    list-style-type: none;
+}
+
+li.flight-detail {
+    margin: 20px;
+}
+
+td {
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.booking-container:hover {
+    background-color: #FFFFDA;
+}
+
+.booking-container {
+    background-color: #FFF;
+    border: solid 2px #CCC;
+    padding: 15px;
+}
+.book-button {
+    margin: 0 !important;
+}
+.flight-arrow {
+    padding-top: 30px;
+}
+
+#error {
+   position: fixed;
+   top: 10px;
+   width: 100%;
+   z-index: 100;
+}
+
+.alert-box {
+    font-size: 1.2em;
+}

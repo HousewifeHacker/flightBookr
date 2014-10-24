@@ -1,0 +1,27 @@
+
+To setup development environment:
+	- setup virtualenv
+	- pip install requirements.txt
+To run:
+	- python airline_tickets.py 
+	- The app is served at localhost on port 5000.
+To use:
+	- When a flight is full, the view for that flight is removed. To get all the views back, you can either refresh the page or click on "Purchase Trip" link in nav bar
+	- Form requires first name and last name to post
+
+Design decisions:
+	- I tried to simplify the Backbone structure so that it'd be easier to read for web developers unfamiliar with Backbone:
+		- View templates are contained in script tags in index.html. JST templates in a templates directory would be cleaner.
+		- Application.js contains all Backbone objects. Conventional structure splits them between models, collections, views, and routers.
+		- I did not namespace the Backbone objects. It is a small enough application that I am not currently concerned with naming collisions, but it is a quick and easy change to add namespacing.
+	- Single page
+		- The confirmation view replaces the form. If we want users to go back to the form by going 'back' in the browser, we could add a Backbone route
+	- Form validations and serialization
+		- Parsley validates before save
+		- Backbone Syphon serializes form inputs as json
+	- Time and date formatting with Moment.js
+	- Foundation 5 does not support IE8 or earlier
+	- FlightService class in controller can be extended to read external APIs
+
+
+

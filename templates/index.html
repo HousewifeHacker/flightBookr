@@ -1,0 +1,137 @@
+<html>
+
+  <head>
+    <title>FlightBookr</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parsley.css') }}">
+    <script src="../static/javascripts/jquery-1.11.1.min.js"></script>
+    <script src="../static/javascripts/underscore-min.js"></script>
+    <script src="../static/javascripts/backbone-min.js"></script>
+    <script src="../static/javascripts/backbone.marionette.js"></script>
+    <script src="../static/javascripts/backbone.syphon.min.js"></script>
+    <script src="../static/javascripts/moment.min.js"></script>
+    <script src="../static/javascripts/foundation.min.js"></script>
+    <script src="../static/javascripts/parsley.min.js"></script>
+    <script src="../static/javascripts/application.js"></script>
+  </head>
+
+  <body>
+  <nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">FlightBookr</a></h1>
+    </li>
+    <li class="toggle-topbar"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="left">
+      <li><a href="/">Purchase Trip</a></li>
+    </ul>
+  </section>
+  </nav>
+
+    <div id="error"></div>
+    <div id="content">
+      Loading...
+    </div>
+
+    <!-- Marionette Error Region -->
+    <script type="text/template" id="error-flight-booked">
+	<div class="small-8 small-offset-2 columns end">
+	  <div data-alert class="alert-box alert">
+	    That flight is full.
+	  </div>
+	</div>
+    </script>
+
+    <!-- Used by Marionette BookingFormView -->
+    <script type="text/template" id="booking-form-template">
+      <h1>Purchase Trip</h1>
+      <form action="{{ url_for('book_flight') }}" name="booking-form" method="post">
+	<div class="row">
+	  <div class="small-3 small-offset-2 columns">
+	    <label>First Name <small> required </small>
+	      <input required name="firstname" type="text" class="small-12">
+	    </label>
+	  </div>
+	  <div class="small-5 columns end">
+	    <label>Last Name <small> required </small>
+	      <input required name="lastname" type="text" class="small-12">
+	    </label>
+	  </div>
+	</div><!-- class row -->
+	<div class="row">
+	  <div class="small-2 small-offset-2 columns">
+	    <label>Number of Bags
+	      <select name="bags">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	      </select>
+	    </label>
+	  </div> <!-- class small-2  -->
+	</div> <!-- class row -->
+	<div class="row">
+	  <ul id="flights-menu" class="small-8 small-offset-2">
+	  </ul>
+	</label>
+	<input type="hidden" value="" id="flight_number" name="flight_number">
+      </form>
+    </script>
+
+    <!-- Used by Marionette FlightItemView -->
+    <script type="text/template" id="flight-detail-template">
+      <div class="booking-container row">
+	<div class="row">
+	  <div class="small-2 columns">
+            <div class="money">$<%= cost.toFixed(2) %></div>
+	      <button class="book-button button tiny">Book</button>
+	  </div>
+	  <div class="small-3 columns">
+    	    <div>
+                <strong>Leaves:</strong> <%= departs.airport %>
+           </div>
+	   <%= moment(departs.when).format('MMMM Do YYYY') %>
+	   <span class="time">
+               <%= moment(departs.when).format('h:mm a') %>
+           </span>
+	  </div>
+	  <div class="small-1 columns text-center">
+   	      <div class="flight-arrow">
+ 	          <i class="fi-arrow-right"></i>
+              </div>
+	  </div>
+	  <div class="small-3 columns">
+	      <div>
+                  <strong>Arrives:</strong> <%= arrives.airport %><br>
+              </div>
+              <%= moment(arrives.when).format('MMMM Do YYYY') %>
+	      <span class="time">
+                  <%= moment(arrives.when).format('h:mm a') %>
+              </span>
+	  </div>
+	  <div class="small-3 columns">
+	    	   <b><%= airline %></b> <%= number %>
+	  </div>
+	</div>
+      </div>
+    </script>    
+
+    <!-- Used by Marionette BookedSuccessView -->
+    <script type="text/template" id="confirm-booking-template">
+      <div class="row">
+	<div class="small-8 small-offset-2 columns end">
+	  <h1>Congratulations!</h1>
+	  <div class="booking-container">
+	    Your confirmation code is <strong><%= confirmation %></strong>
+	  </div>
+	</div>
+      </div>
+    </script>
+  </body>
+</html>

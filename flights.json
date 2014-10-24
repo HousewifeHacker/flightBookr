@@ -1,0 +1,56 @@
+{
+    "flights": [
+        {
+            "airline": "Mobius Airways",
+            "cost": 567.89,
+            "departs": {
+                "airport": "SFO",
+                "when": "2015-01-01T12:00:00"
+            },
+            "arrives": {
+                "airport": "IAH",
+                "when": "2015-01-01T16:00:00"
+            },
+            "number": "MO123"
+        },
+        {
+            "airline": "Mobius Airways",
+            "cost": 321.98,
+            "departs": {
+                "airport": "ABQ",
+                "when": "2015-01-01T12:30:00"
+            },
+            "arrives": {
+                "airport": "ATL",
+                "when": "2015-01-01T15:30:00"
+            },
+            "number": "MO347"
+        },
+        {
+            "airline": "Mobius Airways",
+            "cost": 678.9,
+            "departs": {
+                "airport": "SFO",
+                "when": "2015-01-01T10:15:00"
+            },
+            "arrives": {
+                "airport": "STL",
+                "when": "2015-01-01T16:45:00"
+            },
+            "number": "MO102"
+        },
+        {
+            "airline": "Mobius Airways",
+            "cost": 456.78,
+            "departs": {
+                "airport": "SFO",
+                "when": "2015-01-01T09:35:00"
+            },
+            "arrives": {
+                "airport": "OMA",
+                "when": "2015-01-01T14:40:00"
+            },
+            "number": "MO77"
+        }
+    ]
+}
