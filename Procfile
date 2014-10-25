@@ -1,1 +1,1 @@
-web: python airline_tickets.py
+web: gunicorn airline_tickets:app
