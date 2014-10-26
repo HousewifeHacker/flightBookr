@@ -1,5 +1,4 @@
 <html>
-
   <head>
     <title>FlightBookr</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation-icons.css') }}">
@@ -7,22 +6,22 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parsley.css') }}">
-    <script src="../static/javascripts/jquery-1.11.1.min.js"></script>
-    <script src="../static/javascripts/underscore-min.js"></script>
-    <script src="../static/javascripts/backbone-min.js"></script>
-    <script src="../static/javascripts/backbone.marionette.js"></script>
-    <script src="../static/javascripts/backbone.syphon.min.js"></script>
-    <script src="../static/javascripts/moment.min.js"></script>
-    <script src="../static/javascripts/foundation.min.js"></script>
-    <script src="../static/javascripts/parsley.min.js"></script>
-    <script src="../static/javascripts/application.js"></script>
+    <script src="{{ url_for('static', filename='javascripts/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/underscore-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/backbone-min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/backbone.marionette.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/backbone.syphon.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/foundation.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/parsley.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/application.js') }} "></script>
   </head>
 
   <body>
   <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
     <li class="name">
-      <h1><a href="#">FlightBookr</a></h1>
+      <h1><a href="/">FlightBookr</a></h1>
     </li>
     <li class="toggle-topbar"><a href="#"><span>Menu</span></a></li>
   </ul>
