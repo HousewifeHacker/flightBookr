@@ -1,2 +1,2 @@
-gen/
-.webassets-cache/
+static/gen/
+static/.webassets-cache/
