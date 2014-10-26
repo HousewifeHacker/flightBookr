@@ -1,3 +1,21 @@
+// Get our templates from window.JST
+old_renderer = Backbone.Marionette.Renderer.render;
+
+Backbone.Marionette.Renderer.render = function(template, data) {
+    // If we are providing an ID lets get the template from
+    // the DOM
+    if (template.indexOf('#') == 0) {
+	result = old_renderer(template, data);
+	return result;
+    }
+
+    if (template in JST) {
+	return JST[template](data);
+    } else {
+	console.log("Could not find template " + template);
+    }
+};
+
 FlightApp = new Backbone.Marionette.Application();
 
 FlightApp.addRegions({
@@ -25,13 +43,13 @@ Booking = Backbone.Model.extend({
 
 ErrorView = Backbone.Marionette.ItemView.extend({
     className: 'row',
-    template: '#error-flight-booked'
+    template: 'error-flight-booked'
 });
 
 FlightItemView = Backbone.Marionette.ItemView.extend({
     tagName: 'li',
     className: 'flight-detail',
-    template: '#flight-detail-template',
+    template: 'flight-detail-template',
     events: {
 	'click button': 'book'
     },
@@ -45,7 +63,7 @@ FlightItemView = Backbone.Marionette.ItemView.extend({
 
 BookingFormView = Backbone.Marionette.CompositeView.extend({    
     id: 'booking-form',
-    template: '#booking-form-template',
+    template: 'booking-form-template',
     childView: FlightItemView,
     childViewContainer: "#flights-menu",
     childEvents: {
@@ -91,7 +109,7 @@ BookedSuccessView = Backbone.Marionette.ItemView.extend({
 	confirmation = options.confirmation;
 	console.log("CONFIRMATION", confirmation);
     },
-    template: "#confirm-booking-template"
+    template: "confirm-booking-template"
 });
 
 MyRouter = Backbone.Marionette.AppRouter.extend({
