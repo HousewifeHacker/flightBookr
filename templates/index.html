@@ -1,20 +1,32 @@
 <html>
   <head>
     <title>FlightBookr</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation-icons.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parsley.css') }}">
-    <script src="{{ url_for('static', filename='javascripts/jquery-1.11.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/underscore-min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/backbone-min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/backbone.marionette.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/backbone.syphon.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/moment.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/foundation.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/parsley.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='javascripts/application.js') }} "></script>
+
+    <!-- foundation-icons.css links to images that are not bundled -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='foundation-icons.css') }}" />
+    
+    {% assets filters="cssmin", output="gen/packed.css",
+        'foundation.min.css',
+        'normalize.css',
+        'style.css',
+        'parsley.css'
+    %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+    {% endassets %}
+    
+    {% assets filters="jsmin", output="gen/packed.js",
+        "javascripts/jquery-1.11.1.min.js",
+        "javascripts/underscore-min.js",
+        "javascripts/backbone-min.js",
+        "javascripts/backbone.marionette.js",
+        "javascripts/backbone.syphon.min.js",
+        "javascripts/moment.min.js",
+        "javascripts/foundation.min.js",
+        "javascripts/parsley.min.js",
+        "javascripts/application.js"   
+    %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
   </head>
 
   <body>

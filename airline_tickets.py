@@ -1,5 +1,7 @@
 import random
 import json
+import os
+
 from flask import (
     Flask,
     jsonify,
@@ -7,11 +9,15 @@ from flask import (
     request,
     url_for,
     render_template,
-    g,
 )
 from jsonschema import validate
+from flask.ext.assets import Environment
 
+IS_DEBUG = os.environ.get('DEBUG', 'false').lower() == 'true'
 app = Flask(__name__)
+app.config['ASSETS_DEBUG'] = IS_DEBUG
+assets = Environment()
+assets.init_app(app)
 
 
 class FlightService(object):
@@ -35,7 +41,7 @@ class FlightService(object):
         return self.flights
 
 flight_service = FlightService('flights.json')
-
+assets = Environment(app)
 
 @app.route('/', methods=['GET'])
 def root():
@@ -112,4 +118,4 @@ def confirm_booking(_flight_num):
         return None
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=IS_DEBUG)

@@ -1,1 +1,1 @@
-web: gunicorn airline_tickets:app
+web: gunicorn airline_tickets:app --log-file=-

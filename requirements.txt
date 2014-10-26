@@ -2,3 +2,6 @@ flask
 jsonschema
 gunicorn
 flake8
+Flask-Assets
+jsmin
+cssmin
