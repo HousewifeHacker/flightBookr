@@ -1,7 +1,7 @@
 {
     "flights": [
         {
-            "airline": "Mobius Airways",
+            "airline": "Jessie Airways",
             "cost": 567.89,
             "departs": {
                 "airport": "SFO",
@@ -11,10 +11,10 @@
                 "airport": "IAH",
                 "when": "2015-01-01T16:00:00"
             },
-            "number": "MO123"
+            "number": "JA123"
         },
         {
-            "airline": "Mobius Airways",
+            "airline": "Jessie Airways",
             "cost": 321.98,
             "departs": {
                 "airport": "ABQ",
@@ -24,10 +24,10 @@
                 "airport": "ATL",
                 "when": "2015-01-01T15:30:00"
             },
-            "number": "MO347"
+            "number": "JA347"
         },
         {
-            "airline": "Mobius Airways",
+            "airline": "Gamgan Air",
             "cost": 678.9,
             "departs": {
                 "airport": "SFO",
@@ -37,10 +37,10 @@
                 "airport": "STL",
                 "when": "2015-01-01T16:45:00"
             },
-            "number": "MO102"
+            "number": "GG102"
         },
         {
-            "airline": "Mobius Airways",
+            "airline": "Jessie Airways",
             "cost": 456.78,
             "departs": {
                 "airport": "SFO",
@@ -50,7 +50,7 @@
                 "airport": "OMA",
                 "when": "2015-01-01T14:40:00"
             },
-            "number": "MO77"
+            "number": "JA77"
         }
     ]
 }
