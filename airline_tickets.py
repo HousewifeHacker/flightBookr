@@ -5,7 +5,6 @@ import os
 from flask import (
     Flask,
     jsonify,
-    redirect,
     request,
     url_for,
     render_template,
@@ -21,7 +20,8 @@ assets.init_app(app)
 
 
 class FlightService(object):
-    '''Data access layer extracts data from internal API. This can be extended for external APIs in the future'''
+    '''Data access layer extracts data from internal API.
+    This can be extended for external APIs in the future'''
     def __init__(self, filename):
         with open(filename) as f:
             self.flights = json.loads(f.read())['flights']
@@ -42,6 +42,7 @@ class FlightService(object):
 
 flight_service = FlightService('flights.json')
 assets = Environment(app)
+
 
 @app.route('/', methods=['GET'])
 @app.route('/', defaults={'path': ''})
@@ -81,12 +82,13 @@ book_schema = {
     'required': ['firstname', 'lastname']
 }
 
+
 @app.route('/flight/book', methods=['POST'])
 def book_flight():
     '''API response to submitted flight booking form'''
 
     data = request.json
-    result = validate(data, book_schema)
+    validate(data, book_schema)
     confirmation = confirm_booking(data['flight_number'])
 
     if confirmation:
@@ -107,9 +109,11 @@ def book_flight():
 def confirm_booking(_flight_num):
     '''Attempt to confirm a booking.
 
-        :param _flight_num: Flight number that the customer is attempting to book.  This is not actually used.
+        :param _flight_num: Flight number that the customer is attempting
+to book.  This is not actually used.
         :type _flight_num: str
-        :returns: Either a confirmation code (6 character string) or None if the flight is full.
+        :returns: Either a confirmation code (6 character string) or None
+if the flight is full.
         :rtype: str | None
     '''
     if random.random() < 0.5:
