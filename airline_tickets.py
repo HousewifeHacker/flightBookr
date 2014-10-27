@@ -44,7 +44,9 @@ flight_service = FlightService('flights.json')
 assets = Environment(app)
 
 @app.route('/', methods=['GET'])
-def root():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def root(*args, **kwargs):
     '''Renders home page and initializes Backbone'''
     return render_template('index.html')
 

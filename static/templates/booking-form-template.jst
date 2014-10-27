@@ -1,32 +1,49 @@
 <!-- Used by Marionette BookingFormView -->
-<h1>Purchase Trip</h1>
-<form action="{{ url_for('book_flight') }}" name="booking-form" method="post">
+<h1>Complete Booking</h1>
+<form id="my-form" name="booking-form" method="post">
     <div class="row">
-        <div class="small-3 small-offset-2 columns">
+        <div class="small-4 small-offset-2 columns">
 	    <label>First Name <small> required </small>
                 <input required name="firstname" type="text" class="small-12">
 	    </label>
         </div>
-	<div class="small-5 columns end">
+	<div class="small-4 columns end">
 	    <label>Last Name <small> required </small>
 	        <input required name="lastname" type="text" class="small-12">
             </label>
 	</div>
     </div><!-- class row -->
     <div class="row">
-        <div class="small-2 small-offset-2 columns">
+        <div class="small-4 small-offset-2 columns">
+    	    <label>Email
+	       <input type="text">
+	     </label>
+	</div>
+        <div class="small-2 columns">
 	    <label>Number of Bags
 	        <select name="bags">
-                    <option value="0">0</option>
+	            <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="3">3</option>
-	        </select>
+		    <option value="3">3</option>
+		</select>
             </label>
 	</div> <!-- class small-2  -->
-    </div> <!-- class row -->
+        <div class="small-2 columns end">
+	    <label>Seat Preference
+	        <select class="small-12">
+		    <option>Any</option>
+                    <option>Aisle</option>
+                    <option>Window</option>
+		</select>
+	    </label>
+	 </div>
+
+    </div>
     <div class="row">
-        <ul id="flights-menu" class="small-8 small-offset-2"></ul>
-	<input type="hidden" value="" id="flight_number" name="flight_number">
+      	<input type="hidden" value="" id="flight_number" name="flight_number">
+	<div class="small-2 small-offset-5">
+	    <button type="submit" name="submit" value="Continue" class="button tiny small-8 small-offset-2">Book</button>
+	</div>
     </div>
 </form>

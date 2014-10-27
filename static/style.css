@@ -58,3 +58,7 @@ h1 {
 .alert-box {
     font-size: 1.2em;
 }
+
+input, select {
+    margin-bottom: 1rem;
+}

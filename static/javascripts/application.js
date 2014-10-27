@@ -38,7 +38,7 @@ Flights = Backbone.Collection.extend({
 });
 
 Booking = Backbone.Model.extend({
-    urlRoot: 'flight/book'
+    urlRoot: '/flight/book'
 });
 
 ErrorView = Backbone.Marionette.ItemView.extend({
@@ -56,26 +56,37 @@ FlightItemView = Backbone.Marionette.ItemView.extend({
 
     book: function(e) {
 	e.preventDefault();
-	this.trigger("book:flight", this.model);
+	url = '/confirm/' + this.model.get('number');
+	Backbone.history.navigate(url, {'trigger': true});
     }
 });
 
+FlightSelectionView = Backbone.Marionette.CompositeView.extend({
+    template: 'flight-selection-template',
+    childView: FlightItemView,
+    childViewContainer: '#flights-menu'
+});
 
-BookingFormView = Backbone.Marionette.CompositeView.extend({    
+BookingFormView = Backbone.Marionette.ItemView.extend({    
     id: 'booking-form',
     template: 'booking-form-template',
-    childView: FlightItemView,
-    childViewContainer: "#flights-menu",
-    childEvents: {
-	'book:flight': 'booked'
+
+    initialize: function(options) {
+	this.flightNumber = options.flightNumber;
+    },
+
+    events: {
+	'submit': 'booked'
     },
 
     onRender: function() {
-	this.validator = this.$('form').parsley();
+	var form = this.$('form');
+	this.validator = form.parsley();
     },
 
-    booked: function(view, model) {
-	this.$('#flight_number').val(model.get('number'));
+    booked: function(e) {
+	e.preventDefault();
+	this.$('flight_number').val(this.FlightNumber);
 	var data = Backbone.Syphon.serialize(this);
 
 	if(this.validator.validate() == false) {
@@ -84,52 +95,59 @@ BookingFormView = Backbone.Marionette.CompositeView.extend({
 	
 	data['bags'] = parseInt(data['bags']);
 	var booking = new Booking(data);
-
 	var that = this;
+
 	booking.save({}, {
 	    success: function() {
 		var view = new BookedSuccessView({
 		    confirmation: booking.get('confirmation')
 		});
-		FlightApp.errorRegion.empty();
 		FlightApp.mainRegion.show(view);
 	    },
 	    error: function() {
-		var view = new ErrorView();
-		FlightApp.errorRegion.show(view);
-		that.collection.remove(model);
+		var errorView = new ErrorView();
+		FlightApp.errorRegion.show(errorView);
+		Backbone.history.navigate('/', {'trigger': true});
 	    }
 	});
     }
-
 });
 
 BookedSuccessView = Backbone.Marionette.ItemView.extend({
     initialize: function(options) {
 	confirmation = options.confirmation;
-	console.log("CONFIRMATION", confirmation);
     },
     template: "confirm-booking-template"
 });
 
 MyRouter = Backbone.Marionette.AppRouter.extend({
     routes: {
-	'': 'form'
+	'': 'form',
+	'confirm/:flight_number': 'confirm'
     },
 
     form: function() {
 	var flights = new Flights();
 	flights.fetch();
-	var view = new BookingFormView({
+	var view = new FlightSelectionView({
 	    collection: flights
 	});
 	FlightApp.mainRegion.show(view);
+    },
+
+    confirm: function(flight_number) {
+	var formView = new BookingFormView({
+	    'flightNumber': flight_number
+	});
+
+	FlightApp.errorRegion.empty();
+	FlightApp.mainRegion.show(formView);
     }
 });
 
 FlightApp.addInitializer(function() {
     new MyRouter();
-    Backbone.history.start();
+    Backbone.history.start({pushState: true});
 });
 
 $(document).ready(function(){
